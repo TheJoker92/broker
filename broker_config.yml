@@ -1,0 +1,31 @@
+listeners:
+  default:
+    type: tcp
+    bind: 0.0.0.0:1883
+
+sys_interval: 10
+
+auth:
+  allow-anonymous: true
+
+topic-check:
+  enabled: true
+  plugins:
+    - topic_taboo
+
+topic-taboo:
+  taboo:
+    - 'prohibited/#'
+
+logging:
+  version: 1
+  formatters:
+    precise:
+      format: '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+  handlers:
+    console:
+      class: logging.StreamHandler
+      formatter: precise
+  root:
+    handlers: [console]
+    level: DEBUG
